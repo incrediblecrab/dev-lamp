@@ -1,0 +1,61 @@
+{
+  "name": "dev-lamp",
+  "version": "1.0.0",
+  "description": "Your friendly lighthouse performance companion - 100% local",
+  "keywords": [
+    "lighthouse",
+    "performance",
+    "markdown",
+    "local",
+    "privacy",
+    "web-vitals",
+    "core-web-vitals"
+  ],
+  "bin": {
+    "dev-lamp": "./bin/dev-lamp.js",
+    "lamp": "./bin/dev-lamp.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/cli/index.ts",
+    "test": "vitest",
+    "prepublishOnly": "npm run build",
+    "lint": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "mlot.ai",
+  "license": "MIT",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/incrediblecrab/dev-lamp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/incrediblecrab/dev-lamp/issues"
+  },
+  "homepage": "https://github.com/incrediblecrab/dev-lamp#readme",
+  "files": [
+    "dist/",
+    "bin/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "dependencies": {
+    "chalk": "^5.5.0",
+    "chrome-launcher": "^1.2.0",
+    "commander": "^14.0.0",
+    "lighthouse": "^12.8.1",
+    "ora": "^8.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.2.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

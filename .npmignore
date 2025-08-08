@@ -1,0 +1,68 @@
+# Source files (only publish compiled)
+src/
+*.ts
+!*.d.ts
+
+# Development files
+test/
+*.test.*
+*.spec.*
+test-*
+*-test.*
+test-site.html
+
+# Config files
+tsconfig.json
+.gitignore
+.npmignore
+.editorconfig
+.eslintrc*
+.prettierrc*
+.claude/
+
+# Documentation
+docs/
+templates/
+*.md
+!README.md
+!LICENSE
+CONTRIBUTING.md
+CHANGELOG.md
+PUBLIC-READY.md
+lighthouse-report.md
+my-local-site.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.github/
+
+# Build artifacts
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Development artifacts
+coverage/
+.nyc_output/
+*.tgz
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+*.tmp
+
+# Cache
+.cache/
+node_modules/.cache/

@@ -1,8 +1,11 @@
 # dev-lamp
 
+![npm version](https://img.shields.io/npm/v/dev-lamp)
+![MLoT](https://img.shields.io/badge/MLoT-ai-blue)
+
 > Your friendly lighthouse performance companion - 100% local, privacy-first
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Demo](https://raw.githubusercontent.com/incrediblecrab/Packages-and-Extensions-Media/main/dev-lamp.gif)
 
 ## Why dev-lamp?
 
@@ -204,6 +207,18 @@ MIT © mlot.ai
 
 - **Issues:** [GitHub Issues](https://github.com/incrediblecrab/dev-lamp/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/incrediblecrab/dev-lamp/discussions)
+
+## Resources
+
+- 📺 [Watch Demo Video](https://youtu.be/pVsoAoPQqTo)
+- 🌐 [Visit MLoT Page](https://mlot.ai/dev-lamp/)
+- 📦 [View on GitHub](https://github.com/incrediblecrab/dev-lamp)
+- 🔒 [Privacy Policy](https://mlot.ai/privacy)
+
+## Publisher
+
+**Max's Lab of Things**
+Visit [mlot.ai](https://mlot.ai/)
 
 ---
 

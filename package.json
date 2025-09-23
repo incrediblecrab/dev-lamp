@@ -1,6 +1,6 @@
 {
   "name": "dev-lamp",
-  "version": "1.0.0",
+  "version": "1.5.0",
   "description": "Your friendly lighthouse performance companion - 100% local",
   "keywords": [
     "lighthouse",
@@ -27,7 +27,10 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "author": "mlot.ai",
+  "author": {
+    "name": "Max Marquardt",
+    "url": "https://mlot.ai"
+  },
   "license": "MIT",
   "type": "commonjs",
   "repository": {
@@ -37,7 +40,7 @@
   "bugs": {
     "url": "https://github.com/incrediblecrab/dev-lamp/issues"
   },
-  "homepage": "https://github.com/incrediblecrab/dev-lamp#readme",
+  "homepage": "https://mlot.ai/",
   "files": [
     "dist/",
     "bin/",

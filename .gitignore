@@ -76,3 +76,8 @@ temp/
 .Trashes
 ehthumbs.db
 desktop.ini
+
+# --- project-specific (auto-added 2026-08-04) ---
+pnpm-debug.log*
+.npm/
+build/

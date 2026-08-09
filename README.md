@@ -5,7 +5,7 @@
 
 > Your friendly lighthouse performance companion - 100% local, privacy-first
 
-![Demo](https://raw.githubusercontent.com/incrediblecrab/Packages-and-Extensions-Media/main/dev-lamp.gif)
+![Demo](https://raw.githubusercontent.com/incrediblecrab/Packages-and-Extensions-Media/main/gifs/dev-lamp.gif)
 
 ## Why dev-lamp?
 

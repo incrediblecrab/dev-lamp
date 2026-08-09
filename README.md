@@ -172,10 +172,6 @@ PR-ready format optimized for GitHub comments
 ## Development
 
 ```bash
-# Clone repository
-git clone https://github.com/incrediblecrab/dev-lamp.git
-cd dev-lamp
-
 # Install dependencies
 npm install
 
@@ -189,30 +185,10 @@ npm run dev
 npm test
 ```
 
-## Contributing
-
-Contributions welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-MIT © mlot.ai
-
-## Support
-
-- **Issues:** [GitHub Issues](https://github.com/incrediblecrab/dev-lamp/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/incrediblecrab/dev-lamp/discussions)
-
 ## Resources
 
 - 📺 [Watch Demo Video](https://youtu.be/pVsoAoPQqTo)
 - 🌐 [Visit MLoT Page](https://mlot.ai/dev-lamp/)
-- 📦 [View on GitHub](https://github.com/incrediblecrab/dev-lamp)
 - 🔒 [Privacy Policy](https://mlot.ai/privacy)
 
 ## Publisher
@@ -220,6 +196,6 @@ MIT © mlot.ai
 **Max's Lab of Things**
 Visit [mlot.ai](https://mlot.ai/)
 
----
+## License
 
-*dev-lamp - Performance insights, 100% locally*
+MIT

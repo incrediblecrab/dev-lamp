@@ -1,201 +1,138 @@
 # dev-lamp
 
-![npm version](https://img.shields.io/npm/v/dev-lamp)
-![MLoT](https://img.shields.io/badge/MLoT-ai-blue)
+![npm version](https://img.shields.io/npm/v/dev-lamp) ![MLoT](https://img.shields.io/badge/MLoT-ai-blue)
 
-> Your friendly lighthouse performance companion - 100% local, privacy-first
+dev-lamp is a Node.js CLI for running Lighthouse locally and saving performance reports from the command line. It is published on npm as [`dev-lamp`](https://www.npmjs.com/package/dev-lamp) version 1.5.1, matching this repository.
 
 ![Demo](https://raw.githubusercontent.com/incrediblecrab/mlot-developer-media/main/gifs/dev-lamp.gif)
 
-## Why dev-lamp?
+**Objective:** make local Lighthouse checks repeatable for development, pull request notes and CI thresholds without sending a site URL to a separate service.
 
-- **100% Local** - Your data never leaves your machine
-- **Privacy First** - No tracking, no analytics, no external connections
-- **One Command** - Simple as `dev-lamp http://localhost:3000`
-- **Developer Friendly** - Clear errors, great documentation
-- **Multiple Formats** - Markdown, Text, JSON output
+**Inputs:** Node.js, Chrome or Chromium through Lighthouse, a URL to analyze, and optional report settings from the CLI.
 
-## Quick Start
+**Files:**
 
-```bash
-# Install globally
-npm install -g dev-lamp
+- [`bin/`](bin/): the published `dev-lamp` and `lamp` executable wrapper
+- [`src/cli/`](src/cli/): command definitions for analysis and the `wish` alias
+- [`src/core/`](src/core/): Chrome and Lighthouse orchestration
+- [`src/formatters/`](src/formatters/): markdown, text and JSON report formatters
+- [`src/types/`](src/types/): TypeScript report and configuration types
+- [`src/utils/`](src/utils/): URL validation, file writing and error handling
+- [`package.json`](package.json): npm metadata, scripts and bin mappings
+- [`tsconfig.json`](tsconfig.json): TypeScript build configuration
 
-# Analyze your local site
-dev-lamp http://localhost:3000
+**Try it:** `npm install -g dev-lamp`, then `dev-lamp analyze http://localhost:3000 --format md`, or run the checked-out copy with `node bin/dev-lamp.js --help`.
 
-# That's it! Your report is ready
-```
+## CLI reference
 
-## Installation
+`dev-lamp analyze <url>` is the default command and has the alias `a`. The package also installs the `lamp` binary, which points to the same executable.
 
-### Global Installation (Recommended)
-```bash
-npm install -g dev-lamp
-```
+Global options:
 
-### Local Installation
-```bash
-npm install --save-dev dev-lamp
-```
+- `-c, --config <path>` accepts a config file path.
+- `--no-emoji` disables emojis in formatted output.
+- `-V, --version` prints the package version.
 
-## Usage
+Analysis options verified against `src/cli/index.ts`:
 
-### Basic Analysis
-```bash
-# Analyze and save as markdown (default)
-dev-lamp http://localhost:3000
+- `-o, --output <path>` sets the output path; the default is `lighthouse-report.md`.
+- `-f, --format <type>` accepts `md`, `txt` or `json`; the default is `md`.
+- `-t, --template <name>` accepts `minimal`, `detailed` or `github`; the default is `detailed`.
+- `--device <type>` accepts `mobile` or `desktop`; the default is `desktop`.
+- `--categories <list>` selects Lighthouse categories; the default is `performance`.
+- `--threshold <score>` exits with an error when the performance score is below the threshold.
+- `--no-headless` shows the Chrome window.
+- `--keep-alive` keeps Chrome open for multiple runs.
 
-# Specify output file
-dev-lamp http://localhost:3000 -o performance.md
+`dev-lamp wish <url>` and `dev-lamp rub <url>` run the same analyzer with the optional `-o, --output <path>` setting.
 
-# Different format (txt, json)
-dev-lamp http://localhost:3000 -f txt
+## Reports
 
-# Analyze mobile performance
-dev-lamp http://localhost:3000 --device mobile
+Report output is produced by formatter classes for markdown, text and JSON. The analyzer writes a report file, prints a performance summary, and checks the threshold after the report is written.
 
-# Multiple categories
-dev-lamp http://localhost:3000 --categories performance,accessibility,seo
-```
+## Output examples
 
-### Command Options
+### Markdown output
 
-```bash
-dev-lamp analyze <url> [options]
-
-Options:
-  -o, --output <path>      Output file path (default: "lighthouse-report.md")
-  -f, --format <type>      Output format: md, txt, json (default: "md")
-  -t, --template <name>    Template: minimal, detailed, github (default: "detailed")
-  --device <type>          Device: mobile, desktop (default: "desktop")
-  --categories <list>      Categories to audit (default: "performance")
-  --threshold <score>      Minimum acceptable score
-  --no-headless           Show Chrome window
-  --keep-alive            Keep Chrome open for multiple runs
-```
-
-### Alternative Commands
-```bash
-# Make a wish for performance insights
-dev-lamp wish http://localhost:3000
-
-# Alternative command
-dev-lamp rub http://localhost:3000
-```
-
-## Output Examples
-
-### Markdown Output (Default)
 ```markdown
 # Lighthouse Performance Report
 
 Generated by dev-lamp
 **URL:** http://localhost:3000
-**Score:** 95/100 [GOOD]
+**Date:** 2026-09-26T00:00:00.000Z
+**Device:** desktop
+
+## Overall Score: 95/100
+
+## Category Scores
+
+- **Performance:** 95/100 (Good)
 
 ## Core Web Vitals
-- **LCP:** 1.2s - Good
-- **FID:** 50ms - Good
-- **CLS:** 0.05 - Good
+
+| Metric | Value | Rating |
+|--------|-------|--------|
+| **LCP** (Largest Contentful Paint) | 1.2 s | Good |
 ```
 
-### Text Output
-```
+### Text output
+
+```text
 LIGHTHOUSE PERFORMANCE REPORT
-============================
+============================================================
 URL: http://localhost:3000
-Score: 95/100 [GOOD]
+Date: 2026-09-26T00:00:00.000Z
+Device: desktop
+
+PERFORMANCE SCORE
+------------------------------------------------------------
+95/100 [GOOD]
 
 CORE WEB VITALS
-LCP: 1.2s [GOOD]
-FID: 50ms [GOOD]  
-CLS: 0.05 [GOOD]
+------------------------------------------------------------
+LCP: 1.2 s [GOOD]
 ```
 
-### JSON Output
-```json
-{
-  "metadata": {
-    "url": "http://localhost:3000",
-    "timestamp": "2024-01-01T00:00:00Z",
-    "device": "desktop"
-  },
-  "scores": {
-    "performance": 95
-  },
-  "metrics": {
-    "lcp": {
-      "score": 90,
-      "value": 1200,
-      "displayValue": "1.2s"
-    }
-  }
-}
-```
+### JSON output
+
+JSON output is the parsed `LampReport` object, including `metadata`, `scores`, `metrics`, `opportunities` and `diagnostics`.
 
 ## Categories
 
-Available audit categories:
-- `performance` - Core Web Vitals and performance metrics
-- `accessibility` - Accessibility best practices
-- `best-practices` - Web development best practices
-- `seo` - Search Engine Optimization
-- `pwa` - Progressive Web App features
+Available Lighthouse categories are verified in `src/core/lighthouse-runner.ts`:
+
+- `performance`: Core Web Vitals and performance metrics.
+- `accessibility`: accessibility best practices.
+- `best-practices`: web development best practices.
+- `seo`: Search Engine Optimization.
+- `pwa`: Progressive Web App checks.
 
 ## Templates
 
-### Minimal
-Compact report with just essential metrics
-
-### Detailed (Default)
-Comprehensive report with all metrics, opportunities, and diagnostics
-
-### GitHub
-PR-ready format optimized for GitHub comments
-
-## Privacy Commitment
-
-**Your data stays on your machine. Period.**
-
-- No external API calls
-- No tracking or analytics
-- No data collection
-- Chrome runs locally
-- Reports generated locally
-
-## Requirements
-
-- Node.js 18+
-- Chrome or Chromium browser
+- `minimal`: URL, score and Core Web Vitals when present.
+- `detailed`: the default report with metadata, category scores, Core Web Vitals, other metrics, opportunities and diagnostics.
+- `github`: a pull-request-oriented summary with a details block and top opportunities.
 
 ## Development
 
 ```bash
-# Install dependencies
 npm install
-
-# Build TypeScript
 npm run build
-
-# Run in development mode
-npm run dev
-
-# Run tests
 npm test
+npm run lint
 ```
 
-## Resources
+`npm run build` compiles TypeScript to `dist/`. `npm run lint` runs `tsc --noEmit`.
 
-- 📺 [Watch Demo Video](https://youtu.be/pVsoAoPQqTo)
-- 🌐 [Visit MLoT Page](https://mlot.ai/dev-lamp/)
-- 🔒 [Privacy Policy](https://mlot.ai/privacy)
+## Links
 
-## Publisher
-
-**Max's Lab of Things**
-Visit [mlot.ai](https://mlot.ai/)
+- [npm package](https://www.npmjs.com/package/dev-lamp)
+- [Demo video](https://youtu.be/pVsoAoPQqTo)
+- [MLoT product page](https://mlot.ai/dev-lamp/)
+- [Privacy policy](https://mlot.ai/privacy)
+- [Issues](https://github.com/incrediblecrab/dev-lamp/issues)
+- Publisher: [Max's Lab of Things](https://mlot.ai/)
 
 ## License
 
-MIT
+MIT. See [`LICENSE`](LICENSE).

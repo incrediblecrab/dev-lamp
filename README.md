@@ -116,7 +116,7 @@ Available Lighthouse categories are verified in `src/core/lighthouse-runner.ts`:
 ## Development
 
 ```bash
-npm install
+pnpm install
 npm run build
 npm test
 npm run lint

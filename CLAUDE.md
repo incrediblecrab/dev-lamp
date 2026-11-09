@@ -7,7 +7,7 @@ dev-lamp is a TypeScript CLI that runs Lighthouse against a URL in a local Chrom
 ## Commands
 
 ```bash
-npm install
+pnpm install
 npm run build        # tsc -> dist/ (prepublishOnly runs it too)
 npm run lint         # tsc --noEmit; this is the only static check
 npm run dev          # tsx watch on src/cli/index.ts
